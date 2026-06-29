@@ -1,0 +1,168 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Vistas Altaria – Tu nuevo hogar en Culiacán, Sinaloa',
+  description = 'Descubre Vistas Altaria, desarrollo residencial en Culiacán, Sinaloa. Modelo Emerald con acabados de primera, acceso controlado y excelentes amenidades.',
+} = Astro.props;
+
+// Google Analytics 4 — pega aquí tu ID de medición (formato G-XXXXXXXXXX).
+// Déjalo vacío ('') para desactivar el seguimiento.
+const GA_MEASUREMENT_ID = '';
+
+// Meta (Facebook) Pixel — pega aquí tu ID de píxel (solo números).
+// Déjalo vacío ('') para desactivar.
+const META_PIXEL_ID = '';
+
+// TikTok Pixel — pega aquí tu ID de píxel (Pixel ID de TikTok Ads).
+// Déjalo vacío ('') para desactivar.
+const TIKTOK_PIXEL_ID = '';
+---
+
+<!doctype html>
+<html lang="es-MX">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    {/* Google tag (gtag.js) — GA4 */}
+    {GA_MEASUREMENT_ID && (
+      <Fragment>
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}></script>
+        <script is:inline define:vars={{ gaId: GA_MEASUREMENT_ID }}>
+          window.dataLayer = window.dataLayer || [];
+          window.gtag = function(){ dataLayer.push(arguments); };
+          gtag('js', new Date());
+          gtag('config', gaId);
+        </script>
+      </Fragment>
+    )}
+
+    {/* Meta Pixel Code */}
+    {META_PIXEL_ID && (
+      <Fragment>
+        <script is:inline define:vars={{ pixelId: META_PIXEL_ID }}>
+          !function(f,b,e,v,n,t,s)
+          {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+          n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+          if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+          n.queue=[];t=b.createElement(e);t.async=!0;
+          t.src=v;s=b.getElementsByTagName(e)[0];
+          s.parentNode.insertBefore(t,s)}(window, document,'script',
+          'https://connect.facebook.net/en_US/fbevents.js');
+          fbq('init', pixelId);
+          fbq('track', 'PageView');
+        </script>
+        <noscript>
+          <img
+            height="1"
+            width="1"
+            style="display:none"
+            src={`https://www.facebook.com/tr?id=${META_PIXEL_ID}&ev=PageView&noscript=1`}
+            alt=""
+          />
+        </noscript>
+      </Fragment>
+    )}
+
+    {/* TikTok Pixel Code */}
+    {TIKTOK_PIXEL_ID && (
+      <script is:inline define:vars={{ pixelId: TIKTOK_PIXEL_ID }}>
+        !function (w, d, t) {
+          w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];
+          ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"];
+          ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};
+          for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);
+          ttq.instance=function(t){for(var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e};
+          ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script");n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
+          ttq.load(pixelId);
+          ttq.page();
+        }(window, document, 'ttq');
+      </script>
+    )}
+
+    <meta name="description" content={description} />
+    <title>{title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body class="bg-white font-sans text-brand-charcoal antialiased">
+    <slot />
+
+    <!-- Lightbox global: cualquier elemento con [data-lightbox] (data-src, data-alt) lo dispara -->
+    <div
+      id="lightbox"
+      class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/90 p-4 sm:p-8"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Imagen ampliada"
+    >
+      <button
+        id="lightbox-close"
+        type="button"
+        aria-label="Cerrar"
+        class="absolute top-4 right-4 sm:top-6 sm:right-6 w-11 h-11 rounded-full bg-white/10 hover:bg-white/25 text-white flex items-center justify-center transition-colors"
+      >
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+      <img id="lightbox-img" src="" alt="" class="max-w-full max-h-[88vh] object-contain rounded-lg shadow-2xl" />
+    </div>
+
+    <script>
+      const lb = document.getElementById('lightbox');
+      const lbImg = document.getElementById('lightbox-img') as HTMLImageElement | null;
+      const lbClose = document.getElementById('lightbox-close');
+
+      function openLightbox(src: string, alt: string) {
+        if (!lb || !lbImg) return;
+        lbImg.src = src;
+        lbImg.alt = alt;
+        lb.classList.remove('hidden');
+        lb.classList.add('flex');
+        document.body.style.overflow = 'hidden';
+      }
+      function closeLightbox() {
+        if (!lb || !lbImg) return;
+        lb.classList.add('hidden');
+        lb.classList.remove('flex');
+        lbImg.src = '';
+        document.body.style.overflow = '';
+      }
+
+      // Delegación: funciona para cualquier [data-lightbox] presente o futuro.
+      document.addEventListener('click', (e) => {
+        const trigger = (e.target as HTMLElement)?.closest<HTMLElement>('[data-lightbox]');
+        if (trigger) {
+          openLightbox(trigger.dataset.src || '', trigger.dataset.alt || '');
+        }
+      });
+      lbClose?.addEventListener('click', closeLightbox);
+      lb?.addEventListener('click', (e) => {
+        if (e.target === lb) closeLightbox();
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && lb && !lb.classList.contains('hidden')) {
+          closeLightbox();
+          return;
+        }
+        // Enter/Espacio sobre un disparador no nativo (div con role="button").
+        if (e.key === 'Enter' || e.key === ' ') {
+          const el = document.activeElement as HTMLElement | null;
+          const trigger = el?.closest<HTMLElement>('[data-lightbox]');
+          if (trigger && trigger.tagName !== 'BUTTON') {
+            e.preventDefault();
+            openLightbox(trigger.dataset.src || '', trigger.dataset.alt || '');
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

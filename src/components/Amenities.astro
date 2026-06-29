@@ -1,0 +1,100 @@
+---
+const amenities = [
+  {
+    image: '/images/juegos-infantiles.jpg',
+    alt: 'Área de juegos infantiles – Vistas Altaria',
+    title: 'Área de Juegos',
+    description: 'Zona de juegos para niños con piso de caucho reciclado y área de sombra para toda la familia.',
+    icon: `🛝`,
+  },
+  {
+    image: '/images/areas-verdes.jpg',
+    alt: 'Áreas verdes – Vistas Altaria',
+    title: 'Áreas Verdes',
+    description: 'Jardines con palmeras, bancas y senderos para pasear y relajarse en comunidad.',
+    icon: `🌳`,
+  },
+  {
+    image: '/images/amenidad-ejercicio.jpg',
+    alt: 'Área de ejercicio – Vistas Altaria',
+    title: 'Área de Ejercicio',
+    description: 'Espacio al aire libre con equipos de ejercicio para mantenerte activo sin salir del fraccionamiento.',
+    icon: `🏋️`,
+  },
+  {
+    image: '/images/cancha-futbol.jpg',
+    alt: 'Cancha multimodal – Vistas Altaria',
+    title: 'Cancha Multimodal',
+    description: 'Cancha de uso múltiple para fútbol, básquet y más, con superficie de alta resistencia.',
+    icon: `⚽`,
+  },
+];
+---
+
+<section id="amenidades" class="py-20 lg:py-28 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Header -->
+    <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-16 gap-6">
+      <div>
+        <span class="inline-block text-brand-red font-semibold text-sm tracking-widest uppercase mb-3">
+          Fuera de casa también
+        </span>
+        <h2 class="text-4xl lg:text-5xl font-black text-brand-charcoal leading-tight">
+          Estilo de <span class="text-brand-red">Vida</span>
+        </h2>
+      </div>
+      <p class="text-gray-500 max-w-sm">
+        Las amenidades del fraccionamiento convierten cada día en una experiencia especial para toda la familia.
+      </p>
+    </div>
+
+    <!-- Gallery -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      {amenities.map((item) => (
+        <div
+          data-lightbox
+          data-src={item.image}
+          data-alt={item.alt}
+          role="button"
+          tabindex="0"
+          aria-label={`Ampliar imagen: ${item.title}`}
+          class="group relative rounded-2xl overflow-hidden shadow-md cursor-zoom-in"
+        >
+          <div class="aspect-[4/3] lg:aspect-auto lg:h-72 xl:h-80">
+            <img
+              src={item.image}
+              alt={item.alt}
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+            />
+          </div>
+          <!-- Zoom hint -->
+          <span class="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-black/45 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M11 8v6M8 11h6M19 11a8 8 0 11-16 0 8 8 0 0116 0z"/></svg>
+          </span>
+          <!-- Overlay -->
+          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent">
+            <div class="absolute bottom-0 left-0 right-0 p-6">
+              <h3 class="text-white font-bold text-lg flex items-center justify-between gap-2">
+                <span>{item.title}</span>
+                <span class="text-2xl leading-none">{item.icon}</span>
+              </h3>
+              <p class="text-white/80 text-sm mt-1 line-clamp-2">{item.description}</p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- CTA strip -->
+    <div class="mt-12 bg-brand-red rounded-2xl p-8 text-center text-white">
+      <p class="text-lg font-semibold mb-1">¿Quieres ver las amenidades en persona?</p>
+      <p class="text-white/80 text-sm mb-6">Agenda tu visita guiada gratuita y recorre todo el fraccionamiento.</p>
+      <a
+        href="#contacto"
+        class="inline-block bg-white text-brand-red font-bold px-8 py-3 rounded-full hover:bg-gray-100 transition-colors"
+      >
+        Agendar Visita Gratuita
+      </a>
+    </div>
+  </div>
+</section>

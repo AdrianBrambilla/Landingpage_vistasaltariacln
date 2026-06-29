@@ -1,0 +1,181 @@
+---
+const slides = [
+  { image: '/images/hero-tinaco.jpg',     alt: 'Fachada Modelo Emerald con tinaco – Vistas Altaria' },
+  { image: '/images/hero-cancha.jpg',     alt: 'Cancha multimodal – Vistas Altaria' },
+  { image: '/images/hero-casaclub.jpg',   alt: 'Casa club – Vistas Altaria' },
+  { image: '/images/hero-parque.jpg',     alt: 'Parque y áreas verdes – Vistas Altaria' },
+  { image: '/images/hero-juegos.jpg',     alt: 'Área de juegos infantiles – Vistas Altaria' },
+  { image: '/images/hero-areasverdes.jpg', alt: 'Áreas verdes – Vistas Altaria' },
+  { image: '/images/hero-sanitario.jpg',  alt: 'Sanitario ecológico – Vistas Altaria' },
+  { image: '/images/hero-cocina.jpg',     alt: 'Cocina Emerald – Vistas Altaria' },
+  { image: '/images/hero-puerta.jpg',     alt: 'Puerta de seguridad – Vistas Altaria' },
+];
+---
+
+<section
+  id="inicio"
+  class="relative min-h-screen flex items-center justify-center overflow-hidden"
+>
+  <!-- Carousel backgrounds -->
+  <div id="hero-carousel" class="absolute inset-0 z-0">
+    {slides.map((slide, i) => (
+      <div
+        class="hero-slide absolute inset-0 transition-opacity duration-[1200ms] ease-in-out"
+        data-index={i}
+        style={`opacity:${i === 0 ? 1 : 0};`}
+      >
+        <img
+          src={slide.image}
+          alt={slide.alt}
+          loading={i === 0 ? 'eager' : 'lazy'}
+          class="w-full h-full object-cover"
+        />
+      </div>
+    ))}
+    <!-- Dark overlay for text legibility -->
+    <div class="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/60"></div>
+  </div>
+
+  <!-- Prev / Next arrows (desktop) -->
+  <button
+    id="hero-prev"
+    aria-label="Foto anterior"
+    class="hidden md:flex absolute left-4 lg:left-6 top-1/2 -translate-y-1/2 z-20 w-11 h-11 items-center justify-center rounded-full bg-white/15 backdrop-blur-sm border border-white/30 text-white hover:bg-white/30 transition-colors"
+  >
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+  </button>
+  <button
+    id="hero-next"
+    aria-label="Foto siguiente"
+    class="hidden md:flex absolute right-4 lg:right-6 top-1/2 -translate-y-1/2 z-20 w-11 h-11 items-center justify-center rounded-full bg-white/15 backdrop-blur-sm border border-white/30 text-white hover:bg-white/30 transition-colors"
+  >
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+  </button>
+
+  <!-- Content -->
+  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-16">
+    <!-- Headline + copy con backdrop-blur tenue + sombra para legibilidad sin tapar la foto -->
+    <div class="inline-block max-w-3xl rounded-2xl bg-black/15 backdrop-blur-[2px] px-4 py-5 sm:px-8 sm:py-6 mb-9">
+      <h1 class="text-2xl sm:text-4xl lg:text-5xl font-black text-white leading-tight mb-3 [text-shadow:_0_2px_10px_rgb(0_0_0_/_55%)]">
+        TU NUEVO HOGAR EN<br />
+        <span class="text-brand-red">VISTAS ALTARIA</span>
+      </h1>
+
+      <p class="text-white/95 text-sm sm:text-base lg:text-lg max-w-2xl mx-auto font-medium [text-shadow:_0_1px_8px_rgb(0_0_0_/_55%)]">
+        Tu hogar más seguro con barda perimetral, acceso controlado 24/7 con caseta de vigilancia y
+        lector QR, ya equipadas y con excelentes amenidades.
+      </p>
+    </div>
+
+    <!-- CTAs + location badge -->
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+      <a
+        href="#contacto"
+        class="px-8 py-4 bg-brand-red text-white font-bold text-base rounded-full hover:bg-red-600 transition-all hover:scale-105 shadow-lg shadow-red-500/30"
+      >
+        Agendar Visita Gratis
+      </a>
+      <a
+        href="#modelos"
+        class="px-8 py-4 bg-white/20 backdrop-blur-sm text-white font-bold text-base rounded-full border-2 border-white/50 hover:bg-white/30 transition-all"
+      >
+        Ver Modelos
+      </a>
+      <!-- Location badge -->
+      <div class="inline-flex items-center gap-2 bg-white rounded-full px-4 py-2.5 shadow-lg">
+        <svg class="w-4 h-4 text-brand-red flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+          <path
+            fill-rule="evenodd"
+            d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+            clip-rule="evenodd"
+          />
+        </svg>
+        <span class="text-brand-red font-semibold text-sm whitespace-nowrap">Culiacán, Sinaloa</span>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="mt-16 grid grid-cols-3 gap-4 max-w-lg mx-auto">
+      {[
+        { value: '1', label: 'Modelo\nEmerald' },
+        { value: '24h', label: 'Acceso\ncontrolado' },
+        { value: '100%', label: 'Equipadas y listas\npara habitar' },
+      ].map((stat) => (
+        <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-4 text-white border-2 border-brand-red">
+          <div class="text-3xl font-black text-white">{stat.value}</div>
+          <div class="text-xs font-semibold whitespace-pre-line text-white mt-1">{stat.label}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- Carousel dots -->
+  <div id="hero-dots" class="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2.5">
+    {slides.map((_, i) => (
+      <button
+        class="hero-dot h-2.5 rounded-full transition-all duration-300"
+        data-index={i}
+        aria-label={`Ir a la foto ${i + 1}`}
+      ></button>
+    ))}
+  </div>
+</section>
+
+<script>
+  const root = document.getElementById('hero-carousel');
+  if (root) {
+    const slides = Array.from(document.querySelectorAll<HTMLElement>('.hero-slide'));
+    const dots = Array.from(document.querySelectorAll<HTMLElement>('.hero-dot'));
+    const prev = document.getElementById('hero-prev');
+    const next = document.getElementById('hero-next');
+    let current = 0;
+    let timer: ReturnType<typeof setInterval> | undefined;
+    const DELAY = 5000;
+
+    function render() {
+      slides.forEach((s, i) => {
+        s.style.opacity = i === current ? '1' : '0';
+      });
+      dots.forEach((d, i) => {
+        const active = i === current;
+        d.style.width = active ? '28px' : '10px';
+        d.style.backgroundColor = active ? '#FF2F2F' : 'rgba(255,255,255,0.5)';
+      });
+    }
+
+    function go(index: number) {
+      current = (index + slides.length) % slides.length;
+      render();
+    }
+
+    function start() {
+      stop();
+      timer = setInterval(() => go(current + 1), DELAY);
+    }
+    function stop() {
+      if (timer) clearInterval(timer);
+    }
+
+    dots.forEach((d) =>
+      d.addEventListener('click', () => {
+        go(Number(d.dataset.index));
+        start();
+      })
+    );
+    prev?.addEventListener('click', () => {
+      go(current - 1);
+      start();
+    });
+    next?.addEventListener('click', () => {
+      go(current + 1);
+      start();
+    });
+
+    const section = document.getElementById('inicio');
+    section?.addEventListener('mouseenter', stop);
+    section?.addEventListener('mouseleave', start);
+
+    render();
+    start();
+  }
+</script>

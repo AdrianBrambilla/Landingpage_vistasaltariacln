@@ -1,0 +1,279 @@
+---
+---
+
+<section id="contacto" class="py-20 lg:py-28 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      <!-- Left: copy -->
+      <div>
+        <span class="inline-block text-brand-red font-semibold text-sm tracking-widest uppercase mb-3">
+          Sin compromiso
+        </span>
+        <h2 class="text-4xl lg:text-5xl font-black text-brand-charcoal leading-tight mb-4">
+          Agenda tu <span class="text-brand-red">Visita</span><br />Guiada Gratis
+        </h2>
+        <p class="text-gray-500 mb-8">
+          Déjanos tus datos y un asesor te contactará para agendar tu recorrido y darte tu
+          pre-calificación de crédito. Sin presión, sin compromiso.
+        </p>
+
+        <ul class="space-y-4">
+          {[
+            'Recorrido personalizado por el fraccionamiento',
+            'Pre-calificación de crédito Infonavit, Cofinavit o bancario',
+            'Asesor dedicado para resolver tus dudas',
+            'Promociones exclusivas para visitas agendadas',
+          ].map((item) => (
+            <li class="flex items-start gap-3 text-gray-600">
+              <div class="w-6 h-6 rounded-full bg-brand-red/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3.5 h-3.5 text-brand-red" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+              </div>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Right: form -->
+      <div class="bg-white rounded-3xl shadow-xl p-8 lg:p-10">
+        <h3 class="text-xl font-bold text-brand-charcoal mb-6">Déjanos tus datos</h3>
+
+        <form id="contact-form" class="space-y-5" novalidate>
+          <div>
+            <label for="nombre" class="block text-sm font-medium text-brand-charcoal mb-1.5">
+              Nombre completo <span class="text-brand-red">*</span>
+            </label>
+            <input
+              type="text"
+              id="nombre"
+              name="nombre"
+              required
+              autocomplete="name"
+              placeholder="Ej. Juan García"
+              class="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-red/30 focus:border-brand-red transition-colors"
+            />
+          </div>
+
+          <div>
+            <label for="telefono" class="block text-sm font-medium text-brand-charcoal mb-1.5">
+              Teléfono / WhatsApp <span class="text-brand-red">*</span>
+            </label>
+            <input
+              type="tel"
+              id="telefono"
+              name="telefono"
+              required
+              inputmode="numeric"
+              autocomplete="tel-national"
+              maxlength="10"
+              pattern="[0-9]{10}"
+              placeholder="10 dígitos, sin lada"
+              class="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-red/30 focus:border-brand-red transition-colors"
+            />
+          </div>
+
+          <div>
+            <label for="email" class="block text-sm font-medium text-brand-charcoal mb-1.5">
+              Email <span class="text-gray-400 font-normal">(opcional)</span>
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              autocomplete="email"
+              placeholder="tucorreo@ejemplo.com"
+              class="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-red/30 focus:border-brand-red transition-colors"
+            />
+          </div>
+
+          <div>
+            <label for="tipo-credito" class="block text-sm font-medium text-brand-charcoal mb-1.5">
+              Tipo de crédito <span class="text-brand-red">*</span>
+            </label>
+            <select
+              id="tipo-credito"
+              name="tipo-credito"
+              required
+              class="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-red/30 focus:border-brand-red transition-colors bg-white"
+            >
+              <option value="">Selecciona una opción</option>
+              <option value="infonavit">Infonavit</option>
+              <option value="cofinavit">Cofinavit</option>
+              <option value="bank">Crédito bancario</option>
+            </select>
+          </div>
+
+          <!-- Condicional: NSS -->
+          <div id="field-nss" hidden>
+            <label for="nss" class="block text-sm font-medium text-brand-charcoal mb-1.5">
+              NSS (Número de Seguridad Social) <span class="text-brand-red">*</span>
+            </label>
+            <input
+              type="text"
+              id="nss"
+              name="nss"
+              inputmode="numeric"
+              maxlength="11"
+              pattern="[0-9]{11}"
+              placeholder="11 dígitos"
+              class="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-red/30 focus:border-brand-red transition-colors"
+            />
+          </div>
+
+          <!-- Condicional: Ingresos mensuales -->
+          <div id="field-ingresos" hidden>
+            <label for="ingresos" class="block text-sm font-medium text-brand-charcoal mb-1.5">
+              Ingresos mensuales <span class="text-brand-red">*</span>
+            </label>
+            <div class="relative">
+              <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm">$</span>
+              <input
+                type="number"
+                id="ingresos"
+                name="ingresos"
+                min="1"
+                step="0.01"
+                inputmode="decimal"
+                placeholder="25000"
+                class="w-full pl-8 pr-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-red/30 focus:border-brand-red transition-colors"
+              />
+            </div>
+          </div>
+
+          <!-- Error message -->
+          <p id="form-error" class="hidden text-sm text-brand-red bg-brand-red/5 border border-brand-red/20 rounded-xl px-4 py-3"></p>
+
+          <button
+            id="submit-btn"
+            type="submit"
+            class="w-full py-4 bg-brand-red text-white font-bold text-base rounded-full hover:bg-red-600 transition-all hover:shadow-lg hover:shadow-red-500/30 active:scale-95 disabled:opacity-60 disabled:cursor-not-allowed disabled:active:scale-100"
+          >
+            <span id="submit-label">Agendar mi Visita Gratis</span>
+            <span id="submit-loading" class="hidden">Enviando…</span>
+          </button>
+
+          <p class="text-xs text-gray-400 text-center">
+            Al enviar, aceptas que un asesor se ponga en contacto contigo. Sin compromiso de compra.
+          </p>
+        </form>
+
+        <!-- Success state (hidden by default) -->
+        <div id="form-success" class="hidden text-center py-8">
+          <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+          </div>
+          <h4 class="text-xl font-bold text-brand-charcoal mb-2">¡Solicitud recibida!</h4>
+          <p class="text-gray-500 text-sm">Un asesor se pondrá en contacto contigo en menos de 24 horas.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { CREDIT_RULES, type CreditType } from '../config/landing';
+  import { captureUtmParams, normalizePhone, submitLead } from '../lib/leads';
+
+  // Persistir UTM en el primer load (conserva atribución entre clic y submit).
+  captureUtmParams();
+
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  const success = document.getElementById('form-success');
+  const errorBox = document.getElementById('form-error');
+  const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement | null;
+  const submitLabel = document.getElementById('submit-label');
+  const submitLoading = document.getElementById('submit-loading');
+
+  const tipo = document.getElementById('tipo-credito') as HTMLSelectElement | null;
+  const fieldNss = document.getElementById('field-nss');
+  const fieldIngresos = document.getElementById('field-ingresos');
+  const nss = document.getElementById('nss') as HTMLInputElement | null;
+  const ingresos = document.getElementById('ingresos') as HTMLInputElement | null;
+
+  function applyCreditRules() {
+    const rule = CREDIT_RULES[tipo?.value as CreditType] ?? { needsNss: false, needsIncome: false };
+    if (fieldNss && nss) {
+      fieldNss.hidden = !rule.needsNss;
+      nss.required = rule.needsNss;
+      if (!rule.needsNss) nss.value = '';
+    }
+    if (fieldIngresos && ingresos) {
+      fieldIngresos.hidden = !rule.needsIncome;
+      ingresos.required = rule.needsIncome;
+      if (!rule.needsIncome) ingresos.value = '';
+    }
+  }
+
+  tipo?.addEventListener('change', applyCreditRules);
+  applyCreditRules();
+
+  function showError(msg: string) {
+    if (!errorBox) return;
+    errorBox.textContent = msg;
+    errorBox.classList.remove('hidden');
+  }
+  function clearError() {
+    errorBox?.classList.add('hidden');
+  }
+  function setLoading(loading: boolean) {
+    if (!submitBtn) return;
+    submitBtn.disabled = loading;
+    submitLabel?.classList.toggle('hidden', loading);
+    submitLoading?.classList.toggle('hidden', !loading);
+  }
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    clearError();
+
+    const data = Object.fromEntries(new FormData(form)) as Record<string, string>;
+    const creditType = (data['tipo-credito'] || '') as CreditType;
+
+    // Validación cliente (espejo del contrato del servidor).
+    if (!data.nombre?.trim()) return showError('Escribe tu nombre completo.');
+    if (normalizePhone(data.telefono).length !== 10)
+      return showError('El teléfono debe tener 10 dígitos (sin lada).');
+    if (data.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email))
+      return showError('El email no tiene un formato válido.');
+    if (!creditType || !(creditType in CREDIT_RULES))
+      return showError('Selecciona un tipo de crédito.');
+
+    const rule = CREDIT_RULES[creditType];
+    if (rule.needsNss && normalizePhone(data.nss || '').length !== 11)
+      return showError('El NSS debe tener 11 dígitos.');
+    if (rule.needsIncome && !(Number(data.ingresos) > 0))
+      return showError('Indica tus ingresos mensuales (mayor a 0).');
+
+    setLoading(true);
+    const result = await submitLead({
+      name: data.nombre,
+      phone: data.telefono,
+      email: data.email || null,
+      credit_type: creditType,
+      nss: data.nss || null,
+      monthly_income: data.ingresos || null,
+    });
+    setLoading(false);
+
+    if (!result.ok) {
+      showError(result.error || 'Hubo un error. Inténtalo de nuevo.');
+      return;
+    }
+
+    // Éxito: mostrar estado de confirmación.
+    form.classList.add('hidden');
+    success?.classList.remove('hidden');
+
+    // Disparar conversiones DESPUÉS de confirmar éxito.
+    try {
+      (window as any).dataLayer?.push({ event: 'lead_submitted', lead_id: result.data?.lead_id });
+      (window as any).fbq?.('track', 'Lead');
+    } catch {
+      /* sin tracker — ignorar */
+    }
+  });
+</script>
