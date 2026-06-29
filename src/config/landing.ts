@@ -17,16 +17,20 @@ export const LANDING_ZONE = 'Juárez';
 export const LANDING_FRACCIONAMIENTO = 'Portal Bugambilias E2';
 
 // Tipos de crédito permitidos por la edge function.
-export type CreditType = 'infonavit' | 'cofinavit' | 'bank';
+export type CreditType = 'infonavit' | 'cofinavit' | 'bank' | 'fovissste' | 'fovissste_infonavit';
 
 // Lógica condicional de campos según el tipo de crédito.
-//   infonavit -> NSS requerido, ingresos NO
-//   cofinavit -> NSS requerido, ingresos requerido
-//   bank      -> NSS NO,        ingresos requerido
+//   infonavit           -> NSS requerido, ingresos NO
+//   cofinavit           -> NSS requerido, ingresos requerido
+//   bank                -> NSS NO,        ingresos requerido
+//   fovissste           -> NSS requerido, ingresos NO
+//   fovissste_infonavit -> NSS requerido, ingresos NO
 export const CREDIT_RULES: Record<CreditType, { needsNss: boolean; needsIncome: boolean }> = {
-  infonavit: { needsNss: true, needsIncome: false },
-  cofinavit: { needsNss: true, needsIncome: true },
-  bank: { needsNss: false, needsIncome: true },
+  infonavit:           { needsNss: true,  needsIncome: false },
+  cofinavit:           { needsNss: true,  needsIncome: true  },
+  bank:                { needsNss: false, needsIncome: true  },
+  fovissste:           { needsNss: true,  needsIncome: false },
+  fovissste_infonavit: { needsNss: true,  needsIncome: false },
 };
 
 // Llaves UTM que conserva la atribución de marketing.
